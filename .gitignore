@@ -7,5 +7,5 @@
 /build
 /captures
 .externalNativeBuild
-/src/main/res/values/strings.xml
-google-services.json
+app/src/main/res/values/strings.xml
+app/google-services.json
