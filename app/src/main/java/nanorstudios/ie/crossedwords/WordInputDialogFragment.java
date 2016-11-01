@@ -20,7 +20,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
- * TODO Update this line
+ * Dialog Fragment for inserting words.
  */
 
 public class WordInputDialogFragment extends DialogFragment {
@@ -33,6 +33,12 @@ public class WordInputDialogFragment extends DialogFragment {
 
     private Unbinder mUnbinder;
     private UserInputInterface userInputInterface;
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+    }
 
     @Override
     public void onAttach(Context context) {

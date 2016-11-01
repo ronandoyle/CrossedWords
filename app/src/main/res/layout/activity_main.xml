@@ -73,9 +73,16 @@
 
             </RelativeLayout>
 
-
-
         </android.support.v4.widget.NestedScrollView>
+
+        <!--<View-->
+            <!--android:id="@+id/reveal_view"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:layout_gravity="bottom|right"-->
+            <!--android:background="@color/colorAccent"-->
+            <!--android:visibility="gone"/>-->
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabButton"

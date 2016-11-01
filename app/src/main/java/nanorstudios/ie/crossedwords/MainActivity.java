@@ -1,5 +1,9 @@
 package nanorstudios.ie.crossedwords;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.app.Dialog;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,7 +12,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
@@ -17,6 +23,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
+import butterknife.OnClick;
+import butterknife.Optional;
 import io.fabric.sdk.android.Fabric;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +40,10 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.wordsRecyclerView) RecyclerView recyclerView;
     @BindView(R.id.search_terms_text_view) TextView searchTermsTextView;
+//    @BindView(R.id.reveal_view) View revealView;
     private WordsAdapter wordsAdapter;
     private Unbinder mUnbinder;
+    private WordInputDialogFragment wordInputDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
         MobileAds.initialize(getApplicationContext(), getString(R.string.admob_app_id));
 
         setupToolbar();
-        setupFab();
         setupRecyclerView();
     }
 
@@ -62,23 +71,13 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
         setSupportActionBar(toolbar);
     }
 
-    private void setupFab() {
-        fabButton = (FloatingActionButton) findViewById(R.id.fabButton);
-        fabButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openDialog();
-            }
-        });
-    }
-
-    private void openDialog() {
+    @OnClick(R.id.fabButton)
+    protected void openDialog() {
         WordInputDialogFragment wordInputDialog = new WordInputDialogFragment();
         wordInputDialog.show(getSupportFragmentManager(), WordInputDialogFragment.TAG);
     }
 
     private void setupRecyclerView() {
-        recyclerView = (RecyclerView) findViewById(R.id.wordsRecyclerView);
         wordsAdapter = new WordsAdapter();
         LinearLayoutManager layoutManager = new LinearLayoutManager(recyclerView.getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);

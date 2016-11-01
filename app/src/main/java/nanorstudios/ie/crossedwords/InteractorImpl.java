@@ -17,7 +17,9 @@ public class InteractorImpl implements Interactor {
         sysonmyService.enqueue(new Callback<WordService.SynonymResponse>() {
             @Override
             public void onResponse(Call<WordService.SynonymResponse> call, Response<WordService.SynonymResponse> response) {
-                listener.foundSynonmys(response.body().getSynonyms());
+                if (listener != null) {
+                    listener.foundSynonmys(response.body().getSynonyms());
+                }
             }
 
             @Override
