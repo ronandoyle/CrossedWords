@@ -40,9 +40,14 @@ public class PresenterImpl implements Presenter, FetchedWordsListener {
     }
 
     @Override
-    public void foundSynonmys(List<String> synonyms) {
+    public void foundSynonyms(List<String> synonyms) {
         List<String> matchedSynonyms = getCorrectlySizedWords(synonyms, wordSize);
         displayView.updateSynonymList(matchedSynonyms, wordToSearchFor, wordSize, matchedSynonyms.size());
+    }
+
+    @Override
+    public void unableToFindSynonyms() {
+        displayView.displayErrorMessage("Unable to find anything for this word.");
     }
 
     private List<String> getCorrectlySizedWords(List<String> words, int correctSize) {

@@ -18,7 +18,11 @@ public class InteractorImpl implements Interactor {
             @Override
             public void onResponse(Call<WordService.SynonymResponse> call, Response<WordService.SynonymResponse> response) {
                 if (listener != null) {
-                    listener.foundSynonmys(response.body().getSynonyms());
+                    if (response.body() != null) {
+                        listener.foundSynonyms(response.body().getSynonyms());
+                    } else {
+                        listener.unableToFindSynonyms();
+                    }
                 }
             }
 

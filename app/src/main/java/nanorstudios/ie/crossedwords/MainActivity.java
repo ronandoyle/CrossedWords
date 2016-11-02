@@ -16,6 +16,7 @@ import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.ads.AdListener;
@@ -40,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.wordsRecyclerView) RecyclerView recyclerView;
     @BindView(R.id.search_terms_text_view) TextView searchTermsTextView;
-//    @BindView(R.id.reveal_view) View revealView;
     private WordsAdapter wordsAdapter;
     private Unbinder mUnbinder;
     private WordInputDialogFragment wordInputDialog;
@@ -73,7 +73,9 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
 
     @OnClick(R.id.fabButton)
     protected void openDialog() {
-        WordInputDialogFragment wordInputDialog = new WordInputDialogFragment();
+        if (wordInputDialog == null) {
+            wordInputDialog = new WordInputDialogFragment();
+        }
         wordInputDialog.show(getSupportFragmentManager(), WordInputDialogFragment.TAG);
     }
 
@@ -94,12 +96,16 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
     }
 
     private void updateSearchTerms(String wordToSearchFor, int wordSize, int matchCount) {
-        searchTermsTextView.setText(String.format(getString(R.string.search_terms), matchCount, wordToSearchFor, wordSize));
+        if (wordSize != 0) {
+            searchTermsTextView.setText(String.format(getString(R.string.search_terms), matchCount, wordToSearchFor, wordSize));
+        } else {
+            searchTermsTextView.setText(String.format(getString(R.string.search_terms_no_size_specified), matchCount, wordToSearchFor));
+        }
     }
 
     @Override
     public void displayErrorMessage(String message) {
-
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -126,61 +132,16 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
 
             @Override
             public void onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
             }
 
             @Override
             public void onAdLeftApplication() {
-                // Code to be executed when the user has left the app.
             }
 
             @Override
             public void onAdClosed() {
-                // Code to be executed when when the user is about to return
-                // to the app after tapping on an ad.
             }
         });
         adView.loadAd(adRequest);
-    }
-
-    public class WordsAdapter extends RecyclerView.Adapter<WordsAdapter.ViewHolder> {
-
-        private List<String> wordsList = new ArrayList<>();
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_item, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            if (wordsList == null || wordsList.isEmpty()) {
-                return;
-            }
-            holder.wordTextView.setText(wordsList.get(position));
-        }
-
-        @Override
-        public int getItemCount() {
-            return wordsList.size();
-        }
-
-        public void updateWordList(List<String> wordsList) {
-            this.wordsList = wordsList;
-            notifyDataSetChanged();
-        }
-
-
-        class ViewHolder extends RecyclerView.ViewHolder {
-            TextView wordTextView;
-
-            ViewHolder(View itemView) {
-                super(itemView);
-                wordTextView = (TextView) itemView.findViewById(R.id.wordTextView);
-            }
-        }
-
     }
 }

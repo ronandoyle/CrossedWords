@@ -7,5 +7,6 @@ import java.util.List;
  */
 
 public interface FetchedWordsListener {
-    void foundSynonmys(List<String> word);
+    void foundSynonyms(List<String> word);
+    void unableToFindSynonyms();
 }

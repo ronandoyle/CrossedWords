@@ -3,6 +3,7 @@ package nanorstudios.ie.crossedwords;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.text.TextUtils;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.CustomEvent;
@@ -72,9 +74,15 @@ public class WordInputDialogFragment extends DialogFragment {
 
     @OnClick(R.id.submit)
     public void onSubmit() {
-        String wordToSearch = wordSizeTextInput.getEditText().getText().toString();
-        int wordSize = !TextUtils.isEmpty(wordToSearch) ? Integer.valueOf(wordToSearch) : -1;
-        userInputInterface.submit(wordTextInput.getEditText().getText().toString(), wordSize);
+        String wordToSearch = wordTextInput.getEditText().getText().toString();
+        String wordSizeString = wordSizeTextInput.getEditText().getText().toString();
+        if (TextUtils.isEmpty(wordToSearch)) {
+            Toast.makeText(getContext(), "Cannot search for blank word.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        int wordSize = !TextUtils.isEmpty(wordSizeString) ? Integer.valueOf(wordToSearch) : 0;
+        userInputInterface.submit(wordToSearch, wordSize);
         dismiss();
         logSearchEvent(wordToSearch, wordSize);
     }
