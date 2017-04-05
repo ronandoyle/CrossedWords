@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.wordsRecyclerView) RecyclerView recyclerView;
     @BindView(R.id.search_terms_text_view) TextView searchTermsTextView;
+    @BindView(R.id.progress_bar) ProgressBar progressBar;
     private WordsAdapter wordsAdapter;
     private Unbinder mUnbinder;
     private WordInputDialogFragment wordInputDialog;
@@ -53,11 +55,11 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
         presenter = new PresenterImpl(this);
 
         mUnbinder = ButterKnife.bind(this);
-
         MobileAds.initialize(getApplicationContext(), getString(R.string.admob_app_id));
 
         setupToolbar();
         setupRecyclerView();
+        loadAdRequest();
     }
 
     @Override
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
 
     @Override
     public void updateSynonymList(List<String> synonyms, String wordToSearchFor, int wordSize, int matchCount) {
-        loadAdRequest();
+        hideProgressBar();
         wordsAdapter.updateWordList(synonyms);
         updateSearchTerms(wordToSearchFor, wordSize, matchCount);
     }
@@ -107,11 +109,13 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
 
     @Override
     public void displayErrorMessage(String message) {
+        hideProgressBar();
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void submit(String word, int wordSize) {
+        showProgressBar();
         presenter.searchForSynonyms(word, wordSize);
     }
 
@@ -145,5 +149,13 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
             }
         });
         adView.loadAd(adRequest);
+    }
+
+    private void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
     }
 }
