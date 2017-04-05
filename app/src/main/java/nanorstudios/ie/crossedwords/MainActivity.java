@@ -76,7 +76,9 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
         if (wordInputDialog == null) {
             wordInputDialog = new WordInputDialogFragment();
         }
-        wordInputDialog.show(getSupportFragmentManager(), WordInputDialogFragment.TAG);
+        if (!wordInputDialog.isAdded()) {
+            wordInputDialog.show(getSupportFragmentManager(), WordInputDialogFragment.TAG);
+        }
     }
 
     private void setupRecyclerView() {

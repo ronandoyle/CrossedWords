@@ -51,7 +51,7 @@ public class PresenterImpl implements Presenter, FetchedWordsListener {
     }
 
     private List<String> getCorrectlySizedWords(List<String> words, int correctSize) {
-        if (correctSize == -1) {
+        if (correctSize == 0) {
             return words;
         }
         List<String> correctlySizedWords = new ArrayList<>();

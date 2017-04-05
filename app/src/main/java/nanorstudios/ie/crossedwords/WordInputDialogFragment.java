@@ -81,7 +81,7 @@ public class WordInputDialogFragment extends DialogFragment {
             return;
         }
 
-        int wordSize = !TextUtils.isEmpty(wordSizeString) ? Integer.valueOf(wordToSearch) : 0;
+        int wordSize = !TextUtils.isEmpty(wordSizeString) ? Integer.valueOf(wordSizeString) : 0;
         userInputInterface.submit(wordToSearch, wordSize);
         dismiss();
         logSearchEvent(wordToSearch, wordSize);
