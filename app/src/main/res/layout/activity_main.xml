@@ -20,7 +20,7 @@
         android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="invisible"
         android:layout_gravity="center|bottom"
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
