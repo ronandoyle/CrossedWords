@@ -5,5 +5,5 @@ package nanorstudios.ie.crossedwords;
  */
 
 public interface Interactor {
-    void fetchSynonmys(String word, FetchedWordsListener listener);
+    void searchForSynonyms(String word, int wordSize);
 }

@@ -7,6 +7,7 @@ import java.util.List;
  */
 
 public interface DisplayView {
-    void updateSynonymList(List<String> synonyms, String wordToSearchFor, int wordSize, int matchCount);
-    void displayErrorMessage(String message);
+    void updateSynonymList(List<String> synonyms, String wordToSearchFor, int wordSize);
+    void displayErrorMessage();
+    void unableToFindSynonyms();
 }

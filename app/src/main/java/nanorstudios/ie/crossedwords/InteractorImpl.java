@@ -1,28 +1,48 @@
 package nanorstudios.ie.crossedwords;
 
+import android.text.TextUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * TODO Update this line
- */
-
 public class InteractorImpl implements Interactor {
 
+    private Presenter presenter;
+
+    private int wordSize;
+    private String wordToSearchFor;
+
+    public InteractorImpl(Presenter presenter) {
+        this.presenter = presenter;
+    }
+
+
     @Override
-    public void fetchSynonmys(String word, final FetchedWordsListener listener) {
-        Call<WordService.SynonymResponse> sysonmyService =
+    public void searchForSynonyms(String word, int wordSize) {
+        if (TextUtils.isEmpty(word)) {
+            presenter.displayErrorMessage();
+            return;
+        }
+
+        wordToSearchFor = word;
+        this.wordSize = wordSize;
+        fetchSynonmys(word);
+    }
+
+    public void fetchSynonmys(String word) {
+        Call<WordService.SynonymResponse> synonymService =
                 ApiClient.getWordService().getSynonyms(word);
-        sysonmyService.enqueue(new Callback<WordService.SynonymResponse>() {
+        synonymService.enqueue(new Callback<WordService.SynonymResponse>() {
             @Override
             public void onResponse(Call<WordService.SynonymResponse> call, Response<WordService.SynonymResponse> response) {
-                if (listener != null) {
-                    if (response.body() != null) {
-                        listener.foundSynonyms(response.body().getSynonyms());
-                    } else {
-                        listener.unableToFindSynonyms();
-                    }
+                if (response.body() != null) {
+                    presenter.foundSynonyms(getCorrectSizedSynonyms(response.body().getSynonyms(), wordSize), wordToSearchFor, wordSize);
+                } else {
+                    presenter.unableToFindSynonyms();
                 }
             }
 
@@ -31,5 +51,18 @@ public class InteractorImpl implements Interactor {
 
             }
         });
+    }
+
+    public List<String> getCorrectSizedSynonyms(List<String> synonyms, int correctSize) {
+        if (correctSize == 0) {
+            return synonyms;
+        }
+        List<String> correctlySizedSynonyms = new ArrayList<>();
+        for (String word : synonyms) {
+            if (word.length() == correctSize) {
+                correctlySizedSynonyms.add(word);
+            }
+        }
+        return correctlySizedSynonyms;
     }
 }

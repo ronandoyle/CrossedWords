@@ -1,20 +1,12 @@
 package nanorstudios.ie.crossedwords;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.app.Dialog;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewAnimationUtils;
-import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,9 +18,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
 import butterknife.OnClick;
-import butterknife.Optional;
 import io.fabric.sdk.android.Fabric;
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -59,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
 
         setupToolbar();
         setupRecyclerView();
-        loadAdRequest();
+        loadAd();
     }
 
     @Override
@@ -93,10 +83,10 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
     }
 
     @Override
-    public void updateSynonymList(List<String> synonyms, String wordToSearchFor, int wordSize, int matchCount) {
+    public void updateSynonymList(List<String> synonyms, String wordToSearchFor, int wordSize) {
         hideProgressBar();
         wordsAdapter.updateWordList(synonyms);
-        updateSearchTerms(wordToSearchFor, wordSize, matchCount);
+        updateSearchTerms(wordToSearchFor, wordSize, synonyms.size());
     }
 
     private void updateSearchTerms(String wordToSearchFor, int wordSize, int matchCount) {
@@ -108,9 +98,15 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
     }
 
     @Override
-    public void displayErrorMessage(String message) {
+    public void displayErrorMessage() {
         hideProgressBar();
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.no_blank), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void unableToFindSynonyms() {
+        hideProgressBar();
+        Toast.makeText(getApplicationContext(), getString(R.string.unable_to_find_synonyms), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -119,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
         presenter.searchForSynonyms(word, wordSize);
     }
 
-    private void loadAdRequest() {
+    private void loadAd() {
         final AdView adView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
