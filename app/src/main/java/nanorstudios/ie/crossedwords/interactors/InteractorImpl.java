@@ -41,7 +41,7 @@ public class InteractorImpl implements Interactor {
         fetchSynonmys(word);
     }
 
-    public void fetchSynonmys(String word) {
+    private void fetchSynonmys(String word) {
         Call<WordService.SynonymResponse> synonymService =
                 ApiClient.getWordService().getSynonyms(word);
         synonymService.enqueue(new Callback<WordService.SynonymResponse>() {
@@ -61,7 +61,7 @@ public class InteractorImpl implements Interactor {
         });
     }
 
-    public List<String> getCorrectSizedSynonyms(List<String> synonyms, int correctSize) {
+    private List<String> getCorrectSizedSynonyms(List<String> synonyms, int correctSize) {
         if (correctSize == 0) {
             return synonyms;
         }

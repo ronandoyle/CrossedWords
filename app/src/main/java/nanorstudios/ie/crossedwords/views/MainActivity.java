@@ -1,7 +1,5 @@
 package nanorstudios.ie.crossedwords.views;
 
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,12 +34,11 @@ import nanorstudios.ie.crossedwords.adapters.WordsAdapter;
 public class MainActivity extends AppCompatActivity implements DisplayView, WordInputDialogFragment.UserInputInterface {
 
     private Presenter presenter;
-    @BindView(R.id.fabButton) FloatingActionButton fabButton;
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.wordsRecyclerView) RecyclerView recyclerView;
     @BindView(R.id.search_terms_text_view) TextView searchTermsTextView;
     @BindView(R.id.progress_bar) ProgressBar progressBar;
-    @NonNull @BindView(R.id.iv_background) ImageView background;
+    @BindView(R.id.iv_background) ImageView background;
     private WordsAdapter wordsAdapter;
     private Unbinder mUnbinder;
     private WordInputDialogFragment wordInputDialog;
