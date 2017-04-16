@@ -99,4 +99,11 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
+    <ImageView
+        android:id="@+id/iv_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_bg_logo"/>
+
 </RelativeLayout>

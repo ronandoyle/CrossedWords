@@ -1,5 +1,6 @@
 package nanorstudios.ie.crossedwords.views;
 
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
     @BindView(R.id.wordsRecyclerView) RecyclerView recyclerView;
     @BindView(R.id.search_terms_text_view) TextView searchTermsTextView;
     @BindView(R.id.progress_bar) ProgressBar progressBar;
+    @NonNull @BindView(R.id.iv_background) ImageView background;
     private WordsAdapter wordsAdapter;
     private Unbinder mUnbinder;
     private WordInputDialogFragment wordInputDialog;
@@ -101,8 +104,10 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
 
     private void updateSearchTerms(String wordToSearchFor, int wordSize, int matchCount) {
         if (wordSize != 0) {
+            hideBackground();
             searchTermsTextView.setText(String.format(getString(R.string.search_terms), matchCount, wordToSearchFor, wordSize));
         } else {
+            showBackground();
             searchTermsTextView.setText(String.format(getString(R.string.search_terms_no_size_specified), matchCount, wordToSearchFor));
         }
     }
@@ -163,5 +168,13 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
 
     private void hideProgressBar() {
         progressBar.setVisibility(View.GONE);
+    }
+
+    private void showBackground() {
+        background.setVisibility(View.VISIBLE);
+    }
+
+    private void hideBackground() {
+        background.setVisibility(View.GONE);
     }
 }
