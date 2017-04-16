@@ -2,6 +2,10 @@ package nanorstudios.ie.crossedwords;
 
 import java.util.List;
 
+/**
+ * Presenter impplementation class.
+ */
+
 public class PresenterImpl implements Presenter {
 
     private DisplayView view;

@@ -3,7 +3,7 @@ package nanorstudios.ie.crossedwords;
 import java.util.List;
 
 /**
- * TODO Update this line
+ * Interface for View.
  */
 
 public interface DisplayView {

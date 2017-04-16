@@ -50,16 +50,4 @@ public class ApiClient {
 
         return sWordService;
     }
-
-
-//    private static Retrofit getRetrofit() {
-//        return new Retrofit.Builder().baseUrl(baseEndpoint).build();
-//    }
-
-//    public RetrofitInterface getRetrofitInterface() {
-//        if (sRetrogitInterface == null) {
-//            sRetrogitInterface = getRetrofit().create(RetrofitInterface.class);
-//        }
-//        return sRetrogitInterface;
-//    }
 }

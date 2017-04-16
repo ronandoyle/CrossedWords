@@ -9,6 +9,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Interactor implementation.
+ */
+
 public class InteractorImpl implements Interactor {
 
     private Presenter presenter;

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TODO Update this line
+ * Recycler adapter to display the results.
  */
 
 public class WordsAdapter extends RecyclerView.Adapter<WordsAdapter.ViewHolder> {

@@ -11,7 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
- * TODO Update this line
+ * RecyclerView item decorator.
  */
 
 public class BottomDecoration extends RecyclerView.ItemDecoration {

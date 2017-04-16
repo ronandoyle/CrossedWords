@@ -8,7 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 /**
- * TODO Update this line
+ * Interface for the word service.
  */
 
 public interface WordService {
@@ -16,12 +16,7 @@ public interface WordService {
     Call<SynonymResponse> getSynonyms(@Path("word") String word);
 
     class SynonymResponse {
-        String word;
         List<String> synonyms;
-
-        public String getWord() {
-            return word;
-        }
 
         public List<String> getSynonyms() {
             return synonyms;

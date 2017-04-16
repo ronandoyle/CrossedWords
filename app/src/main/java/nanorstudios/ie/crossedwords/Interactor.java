@@ -1,7 +1,7 @@
 package nanorstudios.ie.crossedwords;
 
 /**
- * TODO Update this line
+ * Interface for network interactor.
  */
 
 public interface Interactor {
