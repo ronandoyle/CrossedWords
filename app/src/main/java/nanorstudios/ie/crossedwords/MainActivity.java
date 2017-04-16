@@ -86,7 +86,11 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
     public void updateSynonymList(List<String> synonyms, String wordToSearchFor, int wordSize) {
         hideProgressBar();
         wordsAdapter.updateWordList(synonyms);
-        updateSearchTerms(wordToSearchFor, wordSize, synonyms.size());
+        if (synonyms != null) {
+            updateSearchTerms(wordToSearchFor, wordSize, synonyms.size());
+        } else {
+            updateSearchTerms(wordToSearchFor, wordSize, 0);
+        }
     }
 
     private void updateSearchTerms(String wordToSearchFor, int wordSize, int matchCount) {

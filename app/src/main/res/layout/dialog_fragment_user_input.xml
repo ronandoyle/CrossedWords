@@ -10,26 +10,28 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputWord"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:layout_height="wrap_content">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Word to lookup"/>
+            android:imeOptions="actionDone"
+            android:maxLines="1"
+            android:hint="@string/hint_word_to_lookup"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputWordSize"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textInputWord"
-        android:layout_centerInParent="true">
+        android:layout_height="wrap_content">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Number of letters "/>
+            android:inputType="number"
+            android:imeOptions="actionDone"
+            android:maxLines="1"
+            android:hint="@string/hint_number_of_letters"/>
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -37,5 +39,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Find words"/>
+        android:text="@string/find_words"/>
 </LinearLayout>
