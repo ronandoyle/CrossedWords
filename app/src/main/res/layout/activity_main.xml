@@ -93,6 +93,7 @@
             android:layout_marginEnd="@dimen/codelab_fab_margin_right"
             android:transitionName="UserInput"
             android:clickable="true"
+            android:tint="@android:color/white"
             app:srcCompat="@android:drawable/ic_menu_search"
             app:fabSize="normal"/>
 
