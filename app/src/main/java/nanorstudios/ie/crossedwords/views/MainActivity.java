@@ -101,10 +101,8 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
 
     private void updateSearchTerms(String wordToSearchFor, int wordSize, int matchCount) {
         if (wordSize != 0) {
-            hideBackground();
             searchTermsTextView.setText(String.format(getString(R.string.search_terms), matchCount, wordToSearchFor, wordSize));
         } else {
-            showBackground();
             searchTermsTextView.setText(String.format(getString(R.string.search_terms_no_size_specified), matchCount, wordToSearchFor));
         }
     }
@@ -167,11 +165,20 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
         progressBar.setVisibility(View.GONE);
     }
 
-    private void showBackground() {
+    @Override
+    public void showBackground() {
         background.setVisibility(View.VISIBLE);
     }
 
-    private void hideBackground() {
+    @Override
+    public void hideBackground() {
         background.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void clearList() {
+        if (wordsAdapter != null) {
+            wordsAdapter.clearList();
+        }
     }
 }

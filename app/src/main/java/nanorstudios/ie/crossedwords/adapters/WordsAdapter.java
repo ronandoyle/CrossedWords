@@ -43,6 +43,10 @@ public class WordsAdapter extends RecyclerView.Adapter<WordsAdapter.ViewHolder> 
         notifyDataSetChanged();
     }
 
+    public void clearList() {
+        wordsList.clear();
+        notifyDataSetChanged();
+    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView wordTextView;
@@ -52,5 +56,4 @@ public class WordsAdapter extends RecyclerView.Adapter<WordsAdapter.ViewHolder> 
             wordTextView = (TextView) itemView.findViewById(R.id.wordTextView);
         }
     }
-
 }

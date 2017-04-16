@@ -30,15 +30,19 @@ public class PresenterImpl implements Presenter {
     @Override
     public void displayErrorMessage() {
         view.displayErrorMessage();
+        view.showBackground();
     }
 
     @Override
     public void foundSynonyms(List<String> synonyms, String wordToSearchFor, int wordSize) {
+        view.hideBackground();
         view.updateSynonymList(synonyms, wordToSearchFor, wordSize);
     }
 
     @Override
     public void unableToFindSynonyms() {
         view.unableToFindSynonyms();
+        view.clearList();
+        view.showBackground();
     }
 }
