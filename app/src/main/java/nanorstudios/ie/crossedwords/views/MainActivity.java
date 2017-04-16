@@ -1,4 +1,4 @@
-package nanorstudios.ie.crossedwords;
+package nanorstudios.ie.crossedwords.views;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +24,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import nanorstudios.ie.crossedwords.BottomDecoration;
+import nanorstudios.ie.crossedwords.interfaces.DisplayView;
+import nanorstudios.ie.crossedwords.interfaces.Presenter;
+import nanorstudios.ie.crossedwords.presenters.PresenterImpl;
+import nanorstudios.ie.crossedwords.R;
+import nanorstudios.ie.crossedwords.adapters.WordsAdapter;
 
 public class MainActivity extends AppCompatActivity implements DisplayView, WordInputDialogFragment.UserInputInterface {
 

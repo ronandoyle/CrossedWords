@@ -1,10 +1,14 @@
-package nanorstudios.ie.crossedwords;
+package nanorstudios.ie.crossedwords.interactors;
 
 import android.text.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import nanorstudios.ie.crossedwords.ApiClient;
+import nanorstudios.ie.crossedwords.interfaces.Interactor;
+import nanorstudios.ie.crossedwords.interfaces.Presenter;
+import nanorstudios.ie.crossedwords.interfaces.WordService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

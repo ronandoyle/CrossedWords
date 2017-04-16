@@ -1,4 +1,4 @@
-package nanorstudios.ie.crossedwords;
+package nanorstudios.ie.crossedwords.interfaces;
 
 /**
  * Interface for network interactor.

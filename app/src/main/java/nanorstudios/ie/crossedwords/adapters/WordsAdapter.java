@@ -1,4 +1,4 @@
-package nanorstudios.ie.crossedwords;
+package nanorstudios.ie.crossedwords.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import nanorstudios.ie.crossedwords.R;
 
 /**
  * Recycler adapter to display the results.

@@ -1,6 +1,11 @@
-package nanorstudios.ie.crossedwords;
+package nanorstudios.ie.crossedwords.presenters;
 
 import java.util.List;
+
+import nanorstudios.ie.crossedwords.interfaces.DisplayView;
+import nanorstudios.ie.crossedwords.interfaces.Interactor;
+import nanorstudios.ie.crossedwords.interactors.InteractorImpl;
+import nanorstudios.ie.crossedwords.interfaces.Presenter;
 
 /**
  * Presenter impplementation class.

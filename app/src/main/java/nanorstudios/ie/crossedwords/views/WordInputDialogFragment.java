@@ -1,9 +1,8 @@
-package nanorstudios.ie.crossedwords;
+package nanorstudios.ie.crossedwords.views;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.text.TextUtils;
@@ -20,6 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import nanorstudios.ie.crossedwords.R;
 
 /**
  * Dialog Fragment for inserting words.
