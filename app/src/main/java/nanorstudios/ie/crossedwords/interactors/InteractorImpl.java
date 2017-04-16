@@ -50,7 +50,7 @@ public class InteractorImpl implements Interactor {
                 if (response.body() != null) {
                     presenter.foundSynonyms(getCorrectSizedSynonyms(response.body().getSynonyms(), wordSize), wordToSearchFor, wordSize);
                 } else {
-                    presenter.unableToFindSynonyms();
+                    presenter.unableToFindSynonyms(wordToSearchFor);
                 }
             }
 

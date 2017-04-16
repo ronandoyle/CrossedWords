@@ -9,8 +9,10 @@ import java.util.List;
 public interface DisplayView {
     void updateSynonymList(List<String> synonyms, String wordToSearchFor, int wordSize);
     void displayErrorMessage();
-    void unableToFindSynonyms();
+    void unableToFindSynonyms(String wordSearched);
     void clearList();
+    void showProgressBar();
+    void hideProgressBar();
     void showBackground();
     void hideBackground();
 }

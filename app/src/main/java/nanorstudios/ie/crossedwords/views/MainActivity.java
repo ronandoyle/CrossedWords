@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
 
     @Override
     public void updateSynonymList(List<String> synonyms, String wordToSearchFor, int wordSize) {
-        hideProgressBar();
         wordsAdapter.updateWordList(synonyms);
         if (synonyms != null) {
             updateSearchTerms(wordToSearchFor, wordSize, synonyms.size());
@@ -109,19 +108,17 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
 
     @Override
     public void displayErrorMessage() {
-        hideProgressBar();
         Toast.makeText(getApplicationContext(), getString(R.string.no_blank), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void unableToFindSynonyms() {
-        hideProgressBar();
+    public void unableToFindSynonyms(String wordSearched) {
+        updateSearchTerms(wordSearched, 0, 0);
         Toast.makeText(getApplicationContext(), getString(R.string.unable_to_find_synonyms), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void submit(String word, int wordSize) {
-        showProgressBar();
         presenter.searchForSynonyms(word, wordSize);
     }
 
@@ -157,11 +154,13 @@ public class MainActivity extends AppCompatActivity implements DisplayView, Word
         adView.loadAd(adRequest);
     }
 
-    private void showProgressBar() {
+    @Override
+    public void showProgressBar() {
         progressBar.setVisibility(View.VISIBLE);
     }
 
-    private void hideProgressBar() {
+    @Override
+    public void hideProgressBar() {
         progressBar.setVisibility(View.GONE);
     }
 

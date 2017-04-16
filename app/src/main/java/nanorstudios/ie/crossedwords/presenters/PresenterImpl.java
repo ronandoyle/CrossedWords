@@ -16,7 +16,6 @@ public class PresenterImpl implements Presenter {
     private DisplayView view;
     private Interactor interactor;
 
-
     public PresenterImpl(DisplayView displayView) {
         this.view = displayView;
         interactor = new InteractorImpl(this);
@@ -25,10 +24,12 @@ public class PresenterImpl implements Presenter {
     @Override
     public void searchForSynonyms(String word, final int wordSize) {
         interactor.searchForSynonyms(word, wordSize);
+        view.showProgressBar();
     }
 
     @Override
     public void displayErrorMessage() {
+        view.hideProgressBar();
         view.displayErrorMessage();
         view.showBackground();
     }
@@ -40,8 +41,9 @@ public class PresenterImpl implements Presenter {
     }
 
     @Override
-    public void unableToFindSynonyms() {
-        view.unableToFindSynonyms();
+    public void unableToFindSynonyms(String wordSearched) {
+        view.hideProgressBar();
+        view.unableToFindSynonyms(wordSearched);
         view.clearList();
         view.showBackground();
     }
