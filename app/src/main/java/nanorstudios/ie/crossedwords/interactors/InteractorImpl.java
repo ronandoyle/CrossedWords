@@ -41,17 +41,13 @@ public class InteractorImpl implements Interactor {
         fetchSynonmys(word);
     }
 
-    private void fetchSynonmys(String word) {
+    public void fetchSynonmys(String word) {
         Call<WordService.SynonymResponse> synonymService =
                 ApiClient.getWordService().getSynonyms(word);
         synonymService.enqueue(new Callback<WordService.SynonymResponse>() {
             @Override
             public void onResponse(Call<WordService.SynonymResponse> call, Response<WordService.SynonymResponse> response) {
-                if (response.body() != null) {
-                    presenter.foundSynonyms(getCorrectSizedSynonyms(response.body().getSynonyms(), wordSize), wordToSearchFor, wordSize);
-                } else {
-                    presenter.unableToFindSynonyms(wordToSearchFor);
-                }
+                handleFetchSynonymsResponse(response);
             }
 
             @Override
@@ -61,7 +57,16 @@ public class InteractorImpl implements Interactor {
         });
     }
 
-    private List<String> getCorrectSizedSynonyms(List<String> synonyms, int correctSize) {
+    public void handleFetchSynonymsResponse(Response<WordService.SynonymResponse> response) {
+        if (response != null && response.body() != null) {
+            presenter.foundSynonyms(getCorrectSizedSynonyms(response.body().getSynonyms(), wordSize), wordToSearchFor, wordSize);
+        } else {
+            presenter.unableToFindSynonyms(wordToSearchFor);
+        }
+    }
+
+
+    public List<String> getCorrectSizedSynonyms(List<String> synonyms, int correctSize) {
         if (correctSize == 0) {
             return synonyms;
         }

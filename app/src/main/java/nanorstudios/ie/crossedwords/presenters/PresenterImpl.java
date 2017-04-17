@@ -21,6 +21,11 @@ public class PresenterImpl implements Presenter {
         interactor = new InteractorImpl(this);
     }
 
+    public PresenterImpl(DisplayView displayView, Interactor interactor) {
+        this.view = displayView;
+        this.interactor = interactor;
+    }
+
     @Override
     public void searchForSynonyms(String word, final int wordSize) {
         interactor.searchForSynonyms(word, wordSize);
