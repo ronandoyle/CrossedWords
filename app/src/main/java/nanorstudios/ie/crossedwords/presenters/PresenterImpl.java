@@ -42,6 +42,7 @@ public class PresenterImpl implements Presenter {
     @Override
     public void foundSynonyms(List<String> synonyms, String wordToSearchFor, int wordSize) {
         view.hideBackground();
+        view.hideProgressBar();
         view.updateSynonymList(synonyms, wordToSearchFor, wordSize);
     }
 
